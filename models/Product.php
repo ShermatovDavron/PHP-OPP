@@ -7,12 +7,9 @@ use vendor\myframe\Model;
 
 class Product extends Model
 {
-    public function getList()
+    function tableName()
     {
-        $sql = "select * from product";
-        $state =$this->db->prepare($sql);
-        $state->execute();
-        return $state->fetchAll();
+        return "product";
     }
     public function insertCategory()
     {

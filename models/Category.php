@@ -9,23 +9,11 @@ use PDO;
 
 class Category extends Model
 {
-    public $db;
-    public function getCategoryList($page, $withoutlimit = false)
+    function tableName()
     {
-        $offset=($page-1)*Constants::LIMIT;
-        if ($withoutlimit){
-            $sql = "Select * from category";
-            $state = $this->db->prepare($sql);
-        }else{
-            $sql = "Select * from category limit :offset, :limit";
-            $state = $this->db->prepare($sql);
-            $state->bindValue(":limit", Constants::LIMIT, PDO::PARAM_INT);
-            $state->bindValue(":offset", $offset, PDO::PARAM_INT);
-        }
-        $state->execute();
-        $result = $state->fetchAll(PDO::FETCH_ASSOC);
-        return $result;
+        return "category";
     }
+    public $db;
     public function getPageCount()
     {
         $sql = "select * from category";
@@ -36,10 +24,25 @@ class Category extends Model
     }
     public function getCategoryById($id)
     {
-        $sql = "select * from category where id=:id";
-        $state = $this->db->prepare($sql);
-        $state = bindValue(":id",$id,PDO::PARAM_INT);
+        $state = $this->db->prepare("select * from category where id=:id");
+        $state -> bindValue(":id",$id,PDO::PARAM_INT);
         $state->execute();
-        return $state->fetch(PDO::FETCH_ASSOC);
+        return $state->fetch(PDO::FETCH_OBJ);
     }
+    public  function save($name)
+    {
+        $sql = "INSERT INTO category(name) values(:name)";
+        $state = $this->db->prepare($sql);
+        $state->bindValue(":name",$name);
+        $state->execute();
+    }
+    public function update($id,$title)
+    {
+        $sql = "UPDATE category set name=:name where id =:id";
+        $state = $this->db->prepare($sql);
+        $state->bindValue(":name",$title);
+        $state->bindValue(":id",$id);
+        $state->execute();
+    }
+
 }

@@ -1,7 +1,7 @@
 <h1>Bu category list</h1>
 
 <div class="container">
-    <a href="add_category.php" class="btn btn-primary">Add tag</a>
+    <a href="/dars.loc/index.php/category/add/" class="btn btn-primary">Add tag</a>
     <table class="table table-hover">
         <thead>
         <tr>
@@ -13,10 +13,10 @@
         <?php
         foreach ($listArr as $item){
             echo "<tr >";
-            echo '<td>'.$item['id'].'</td>';
-            echo '<td>'.$item['name'].'</td>';
-            echo "<td><a href='/dars.loc/index.php/category/update/".$item['id']."' class='btn btn-primary'>Tahrirlash</a>";
-            echo '<a href="/dars.loc/index.php/category/delete/'.$item['id'].'" class="btn btn-danger ms-2">O\'chirish</a></td>';
+            echo '<td>'.$item->id.'</td>';
+            echo '<td>'.$item->name.'</td>';
+            echo "<td><a href='/dars.loc/index.php/category/update/".$item->id."' class='btn btn-primary'>Tahrirlash</a>";
+            echo '<a href="/dars.loc/index.php/category/delete/'.$item->id.'" class="btn btn-danger ms-2">O\'chirish</a></td>';
             echo "</tr>";}?>
         </tbody>
     </table>
