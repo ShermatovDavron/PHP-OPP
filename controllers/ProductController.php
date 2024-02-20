@@ -2,26 +2,18 @@
 
 namespace controllers;
 
+use models\Product;
+use vendor\myframe\Connection;
 use vendor\myframe\Controller;
 
 class ProductController extends Controller
 {
     public function list()
     {
-        $name = "Davron Shermatov";
-        $list = [
-            [
-                'name' => "Davon",
-                "age" => 22
-            ],
-            [
-                'name' => "Eshmat",
-                "age" => 28
-            ]
-        ];
-        $this->view->render('product/list', [
-            "name" => $name,
-            "productList" => $list
+        $product = new Product();
+        $product->getList();
+        $this->view->render('product/list',[
+            "productList"=>$product
         ]);
     }
 

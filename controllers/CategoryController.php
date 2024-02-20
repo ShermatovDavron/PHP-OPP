@@ -2,31 +2,44 @@
 
 namespace controllers;
 
-use Couchbase\View;
+//use Couchbase\View;
+use models\Category;
 use vendor\myframe\Connection;
 use vendor\myframe\Controller;
-use vendor\myframe\views;
+use vendor\myframe\Views;
+
 
 class CategoryController extends Controller
 {
     public function list()
     {
-        $sql = "select * from category";
-        $conn = new Connection();
-        $db = $conn->getConnection();
-        $state =$db->prepare($sql);
-        $state->execute();
-        $result=$state->fetchAll();
-        $this->view->render('category/list',['list'=>$result]);
+        $category = new Category();
+        if(isset($_GET['page'])) {
+            $page = $_GET['page'];
+        } else {
+            $page = 1;
+        }
+        $result = $category->getCategoryList($page);
+        $pageCount = $category->getPageCount();
+        $this->view->render('category/list', [
+            'listArr' => $result,
+            'pageCount' => $pageCount
+        ]);
     }
+
     public function add()
     {
         $this->view->render('category/add');
     }
-    public function update()
+
+    public function update($id)
     {
         $this->view->render('category/update');
+        $category = new Category();
+        $result = $category->getCategoryById($id);
+        print_r($result);
     }
+
     public function delete()
     {
         $this->view->render('category/delete');

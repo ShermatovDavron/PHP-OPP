@@ -1,7 +1,7 @@
 <?php
 
 namespace vendor\myframe;
-USE PDO;
+use PDO;
 class Connection
 {
     private $conn;
@@ -9,9 +9,9 @@ class Connection
     private $user = 'root';
     private $pass='';
     private $name ='magazin';
-    public function __constructor()
+    public function __construct()
     {
-        $this->conn=new PDO("mysql:host:{$this->host};dbname:{$this->name}",$this->user,$this->pass,array(PDO::MYSQL_ATTR_INIT_COMMAND=>"SET NAMES 'utf8'"));
+        $this->conn=new PDO("mysql:host={$this->host};dbname={$this->name}",$this->user,$this->pass,array(PDO::MYSQL_ATTR_INIT_COMMAND=>"SET NAMES 'utf8'"));
     }
     public function getConnection()
     {
