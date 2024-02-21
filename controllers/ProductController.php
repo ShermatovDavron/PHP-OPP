@@ -14,15 +14,8 @@ class ProductController extends Controller
     public function list()
     {
         $product = new Product();
-        if(isset($_GET['page'])) {
-            $page = $_GET['page'];
-        } else {
-            $page = 1;
-        }
-        $result = $product->getList($page);
-        echo "<pre>";
-        print_r($result);
-//        $pageCount = $product->getPageCount();
+        $result = $product->getList();
+        $pageCount = $product->getPageCount();
         $this->view->render('product/list',[
             "productList"=>$result
         ]);

@@ -11,6 +11,7 @@ class Product extends Model
     {
         return "product";
     }
+
     public function insertCategory()
     {
         $sql = "insert into product values";

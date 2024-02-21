@@ -14,13 +14,7 @@ class CategoryController extends Controller
     public function list()
     {
         $category = new Category();
-
-        if(isset($_GET['page'])) {
-            $page = $_GET['page'];
-        } else {
-            $page = 1;
-        }
-        $result = $category->getList($page);
+        $result = $category->getList();
         $pageCount = $category->getPageCount();
         $this->view->render('category/list', [
             'listArr' => $result,
@@ -46,7 +40,7 @@ class CategoryController extends Controller
             $category->update($id,$_POST['name']);
             header("Location:/dars.loc/index.php/category/list");exit();
         }
-        $result = $category->getCategoryById($id);
+        $result = $category->getRowById($id);
         $this->view->render('category/update',["category"=>$result]);
     }
 
