@@ -2,10 +2,12 @@
 
 namespace controllers;
 
-class SiteController
+use vendor\myframe\Controller;
+
+class SiteController extends Controller
 {
-    public function hello()
+    public function index()
     {
-        echo "Assalomu alaykum";
+        $this->render('site/index');
     }
 }

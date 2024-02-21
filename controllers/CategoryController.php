@@ -16,10 +16,11 @@ class CategoryController extends Controller
         $category = new Category();
         $result = $category->getList();
         $pageCount = $category->getPageCount();
-        $this->view->render('category/list', [
+        $this->render('category/list', [
             'listArr' => $result,
             'pageCount' => $pageCount
         ]);
+
     }
 
     public function add()
@@ -29,7 +30,7 @@ class CategoryController extends Controller
 //            $category->validate();
             $category->save($_POST['name']);
         }
-        $this->view->render('category/add');
+        $this->render('category/add');
     }
 
     public function update($id)
@@ -41,11 +42,11 @@ class CategoryController extends Controller
             header("Location:/dars.loc/index.php/category/list");exit();
         }
         $result = $category->getRowById($id);
-        $this->view->render('category/update',["category"=>$result]);
+        $this->render('category/update',["category"=>$result]);
     }
 
     public function delete()
     {
-        $this->view->render('category/delete');
+        $this->render('category/delete');
     }
 }

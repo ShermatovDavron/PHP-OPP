@@ -9,4 +9,8 @@ class Controller
     {
         $this->view = new Views();
     }
+    public function render($list,$data=null)
+    {
+        $this->view->render($list,$data);
+    }
 }

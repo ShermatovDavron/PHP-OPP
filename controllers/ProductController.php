@@ -16,13 +16,13 @@ class ProductController extends Controller
         $product = new Product();
         $result = $product->getList();
         $pageCount = $product->getPageCount();
-        $this->view->render('product/list',[
+        $this->render('product/list',[
             "productList"=>$result
         ]);
     }
 
     public function add()
     {
-        $this->view->render("product/add");
+        $this->render("product/add");
     }
 }
